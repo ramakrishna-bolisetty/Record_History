@@ -1,0 +1,49 @@
+<template>
+  <div class="slds-m-left_medium">
+    <li>
+      <div class={timeLineClassName}>
+        <div class="slds-media">
+          <div class="slds-media__figure">
+            <lightning-button-icon 
+              icon-name={iconStyle}
+              size="medium"
+              title=""
+              tooltip=""
+              type="button"
+              variant="bare"
+              onclick={updateTimeLineClass}
+            ></lightning-button-icon>
+            <div class="slds-icon_container slds-icon-standard-task slds-timeline__icon" title="recordUpdate">
+              <lightning-icon 
+                  icon-name="standard:task" 
+                  alternative-text="Record Update" 
+                  size="small" 
+                  variant="inverse"
+                ></lightning-icon>
+            </div>
+          </div>
+          <div class="slds-media__body">
+            <div class="slds-grid slds-grid_align-spread slds-timeline__trigger">
+              <div class="slds-grid slds-grid_vertical-align-center slds-truncate_container_75 slds-no-space">
+                <h3 class="slds-truncate">
+                  <p class="slds-m-horizontal_xx-small"><b>{userName}</b> updated <b>{fieldsString}</b> Field(s)</p>
+                </h3>
+              </div> 
+              <p class="slds-m-left_medium">{formattedDate}</p>
+            </div>
+            
+            <article class="slds-box slds-timeline__item_details slds-theme_shade slds-m-top_x-small slds-m-horizontal_xx-small slds-p-around_medium" id="task-item-expanded" aria-hidden="false">
+              <ul class="slds-list_dotted">
+                <template for:each={historyItemObject} for:item="event">
+                  <li key={event.id}>
+                    <p><b>{event.Field}</b> Field is updated from {event.OldValue} to <b>{event.NewValue}</b></p>
+                  </li>
+                </template>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </div>
+    </li>
+  </div>
+</template>

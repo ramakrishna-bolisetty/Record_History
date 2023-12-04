@@ -1,0 +1,40 @@
+<template>
+    <lightning-card icon-name={icon}>
+        <h1 slot="title" class="card_header">
+            {objectApiNameTitle} Record History      
+        </h1>
+        <lightning-combobox
+                name="Field Filter"
+                label="Select Field"
+                value="All"
+                placeholder="Select Field"
+                options={fieldOptions}
+                onchange={searchHandler}
+                slot="actions"
+        ></lightning-combobox>
+        <div class="slds-m-around_medium">
+            <template lwc:if={totalDisplayResults}>
+                <div class="slds-m-around_medium">
+                    <ul class="slds-timeline">
+                        <template for:each={totalDisplayResults} for:item="d">
+                            <c-history-line-item key={d} history-item={d} edit-field-label={editFieldLabel} ></c-history-line-item>
+                        </template>
+                    </ul>
+                </div>
+            </template>
+            <template lwc:if={hasError}>
+                <h1 class="slds-align_absolute-center"><b>Error:</b> {dataLoadError}</h1>
+            </template>
+            <template lwc:if={showViewBtnFlag}>
+                <lightning-button-stateful
+                    label-when-off="view more"
+                    label-when-on="view less"
+                    selected={isSelected}
+                    onclick={viewMoreHandler}
+                    class="slds-align_absolute-center"    
+                >
+                </lightning-button-stateful>
+            </template>
+        </div>
+    </lightning-card>
+</template>
